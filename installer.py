@@ -8,6 +8,7 @@ import shlex
 import shutil
 import subprocess
 import sys
+import tempfile
 
 from send_to_device import runtime
 
@@ -36,6 +37,24 @@ def desktop_quote(value):
     return '"' + str(value).replace('\\', '\\\\').replace('"', '\\"').replace('`', '\\`').replace('$', '\\$').replace('%', '%%') + '"'
 
 
+def replace_tree(source, target):
+    """Stage bundles before replacing; preserves framework symlinks on updates."""
+    target.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='.send-to-device-', dir=target.parent) as directory:
+        stage = Path(directory)
+        payload, backup = stage / 'payload', stage / 'previous'
+        shutil.copytree(source, payload, symlinks=True)
+        existed = target.exists()
+        if existed:
+            target.rename(backup)
+        try:
+            payload.rename(target)
+        except OSError:
+            if existed:
+                backup.rename(target)
+            raise
+
+
 def install(destination=None, shortcuts=True):
     target = Path(destination or install_root()).absolute()
     source = Path(__file__).resolve().parent
@@ -51,13 +70,13 @@ def install(destination=None, shortcuts=True):
         if sys.platform == 'darwin' and binary.parent.name == 'MacOS':
             app_source = binary.parents[2]
             app_target = target / 'Send to Device.app'
-            shutil.copytree(app_source, app_target, dirs_exist_ok=True, symlinks=True)
+            replace_tree(app_source, app_target)
             command = [str(app_target / 'Contents/MacOS/SendToDevice')]
         else:
             app_source = binary.parent
             if app_source == target:
                 raise ValueError('Close the installed app and run the new installer from another folder')
-            shutil.copytree(app_source, target, dirs_exist_ok=True, symlinks=True)
+            replace_tree(app_source, target)
             command = [str(target / binary.name)]
     else:
         shutil.copytree(source / 'send_to_device', target / 'send_to_device', dirs_exist_ok=True,
@@ -86,7 +105,7 @@ def install(destination=None, shortcuts=True):
     elif shortcuts and sys.platform == 'darwin':
         bundle = Path.home() / 'Applications/Send to Device.app'
         if frozen:
-            shutil.copytree(target / 'Send to Device.app', bundle, dirs_exist_ok=True, symlinks=True)
+            replace_tree(target / 'Send to Device.app', bundle)
         else:
             macos = bundle / 'Contents/MacOS'; macos.mkdir(parents=True, exist_ok=True)
             # Standalone Python .app launcher receives CLI paths; select files in UI from Finder.
