@@ -9,6 +9,8 @@ import shutil
 import subprocess
 import sys
 
+from send_to_device import runtime
+
 NAME = 'Send to Device'
 
 
@@ -78,7 +80,7 @@ def install(destination=None, shortcuts=True):
             script = (f'$s=(New-Object -ComObject WScript.Shell).CreateShortcut({ps(link)});'
                       f'$s.TargetPath={ps(command[0])};$s.Arguments={ps(arguments)};'
                       f'$s.WorkingDirectory={ps(target)};$s.Save()')
-            subprocess.run(['powershell.exe', '-NoProfile', '-NonInteractive', '-Command', script], check=True,
+            runtime.run(['powershell.exe', '-NoProfile', '-NonInteractive', '-Command', script], check=True,
                            creationflags=subprocess.CREATE_NO_WINDOW)
             installed.append(str(link))
     elif shortcuts and sys.platform == 'darwin':
@@ -130,17 +132,18 @@ def main():
     parser.add_argument('--uninstall', action='store_true')
     parser.add_argument('--prefix', type=Path)
     parser.add_argument('--no-shortcuts', action='store_true')
+    parser.add_argument('--quiet', action='store_true')
     args = parser.parse_args()
     try:
         target = uninstall(args.prefix) if args.uninstall else install(args.prefix, not args.no_shortcuts)
         text = ('Uninstalled: ' if args.uninstall else 'Installed: ') + str(target)
         print(text)
-        if getattr(sys, 'frozen', False):
+        if getattr(sys, 'frozen', False) and not args.quiet:
             import tkinter as tk
             from tkinter import messagebox
             root = tk.Tk(); root.withdraw(); messagebox.showinfo(NAME, text); root.destroy()
     except Exception as error:
-        if getattr(sys, 'frozen', False):
+        if getattr(sys, 'frozen', False) and not args.quiet:
             import tkinter as tk
             from tkinter import messagebox
             root = tk.Tk(); root.withdraw(); messagebox.showerror(NAME, str(error)); root.destroy()

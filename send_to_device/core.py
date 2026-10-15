@@ -13,6 +13,7 @@ import sys
 import threading
 import time
 import zipfile
+from . import runtime
 
 CREATE_FLAGS = subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0
 
@@ -92,7 +93,7 @@ def check_cancel(cancel):
 
 
 def query(binary, *args):
-    result = subprocess.run([binary, *args], capture_output=True, text=True,
+    result = runtime.run([binary, *args], capture_output=True, text=True,
                             encoding='utf-8', errors='replace', timeout=20, creationflags=CREATE_FLAGS)
     if result.returncode:
         raise RuntimeError(result.stderr.strip() or 'อ่านข้อมูล Tailscale ไม่สำเร็จ')
@@ -146,7 +147,7 @@ def archive(source, destination, cancel):
 def push(binary, path, ip, log, cancel, timeout):
     ipaddress.ip_address(ip)
     target = f'[{ip}]:' if ':' in ip else ip + ':'
-    process = subprocess.Popen([binary, 'file', 'cp', str(path), target], stdout=log, stderr=log,
+    process = runtime.popen([binary, 'file', 'cp', str(path), target], stdout=log, stderr=log,
                                start_new_session=os.name != 'nt', creationflags=CREATE_FLAGS)
     deadline = time.monotonic() + timeout
     try:

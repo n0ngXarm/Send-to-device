@@ -8,7 +8,7 @@ import sys
 import threading
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
-from . import __version__, core
+from . import __version__, core, runtime
 
 TITLE = 'Send to Device'
 
@@ -183,7 +183,7 @@ class App:
     def open_state(self):
         try:
             if sys.platform == 'win32': os.startfile(str(self.state.root))
-            else: subprocess.Popen(['open' if sys.platform == 'darwin' else 'xdg-open', str(self.state.root)])
+            else: runtime.popen(['open' if sys.platform == 'darwin' else 'xdg-open', str(self.state.root)])
         except OSError as error: messagebox.showerror(TITLE, str(error), parent=self.root)
 
     def send(self):
