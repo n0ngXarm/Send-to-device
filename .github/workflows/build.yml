@@ -1,0 +1,82 @@
+name: Test and package
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-22.04
+            platform: linux-x64
+          - os: windows-latest
+            platform: windows-x64
+          - os: macos-15
+            platform: macos-arm64
+          - os: macos-15-intel
+            platform: macos-x64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Unit and installer tests
+        run: python -m unittest discover -s tests -v
+      - name: Linux desktop smoke test
+        if: runner.os == 'Linux'
+        run: xvfb-run -a python tests/gui_smoke.py
+      - name: Native desktop smoke test
+        if: runner.os != 'Linux'
+        run: python tests/gui_smoke.py
+      - name: Install build tool
+        run: python -m pip install pyinstaller==6.20.0
+      - name: Build Linux / Windows
+        if: runner.os != 'macOS'
+        run: python -m PyInstaller --noconfirm --clean --windowed --onedir --name SendToDevice app.py
+      - name: Build macOS
+        if: runner.os == 'macOS'
+        run: python -m PyInstaller --noconfirm --clean --windowed --onedir --name "Send to Device" --osx-bundle-identifier io.github.n0ngxarm.sendtodevice app.py
+      - name: Package installer
+        run: python scripts/package.py ${{ matrix.platform }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Send-to-device-${{ matrix.platform }}
+          path: dist/Send-to-device-*.zip
+      - name: Smoke test bundled Linux app
+        if: runner.os == 'Linux'
+        run: xvfb-run -a dist/SendToDevice/SendToDevice --smoke-test
+      - name: Smoke test bundled Windows app
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $process = Start-Process -FilePath dist/SendToDevice/SendToDevice.exe -ArgumentList '--smoke-test' -Wait -PassThru
+          if ($process.ExitCode -ne 0) { exit $process.ExitCode }
+      - name: Smoke test bundled macOS app
+        if: runner.os == 'macOS'
+        run: '"dist/Send to Device.app/Contents/MacOS/SendToDevice" --smoke-test'
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          gh release view "$TAG" || gh release create "$TAG" --title "Send to Device $TAG" --notes "Portable desktop app for personal Tailscale devices. Extract the archive and run the included installer. Tailscale must be installed and signed in. Windows/macOS builds are unsigned; see README for installation details."
+          gh release upload "$TAG" artifacts/*.zip --clobber
