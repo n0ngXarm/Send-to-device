@@ -32,7 +32,7 @@ Windows และ macOS builds ยังไม่มีใบรับรอง 
 2. เพิ่มไฟล์/โฟลเดอร์ หรือส่ง path จาก command line
 3. เลือกเครื่องที่พร้อมรับ ตรวจชื่อและ IP แล้วกด **ส่งไฟล์**
 
-Linux: Nautilus → คลิกขวา → Scripts → **Send-to-Device**; ตัวติดตั้งไม่ลบสคริปต์เก่า `Send-to-Android`
+Linux: Nautilus → คลิกขวา → Scripts → **Send-to-Device** (แทนที่สคริปต์เก่า `Send-to-Android` ให้อัตโนมัติ)
 
 Windows: คลิกขวาไฟล์ → Show more options → Send to → **Send to Device** หรือเปิดจาก Start Menu
 
