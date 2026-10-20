@@ -1,5 +1,11 @@
 # Send to Device
 
+<p align="center">
+  <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT">
+  <img src="https://img.shields.io/badge/Platform-Linux%20%7C%20Windows%20%7C%20macOS-orange.svg" alt="Platform">
+  <img src="https://img.shields.io/badge/Tailscale-Taildrop-informational.svg" alt="Tailscale Taildrop">
+</p>
+
 แอปส่งไฟล์ระหว่าง **เครื่องของคุณเอง** ผ่าน Tailscale Taildrop รองรับ Linux, Windows และ macOS
 
 - แสดงชื่อเครื่อง **พร้อม IP เสมอ** รองรับเครื่องชื่อซ้ำกัน
@@ -100,3 +106,7 @@ python3 -m PyInstaller --clean --windowed --onedir --name SendToDevice app.py
 ```
 
 GitHub Actions ทดสอบและ build แบบ native บน Linux, Windows, macOS ARM/Intel ทุก push บน main เมื่อ push tag `v*` จะสร้าง release ZIP หลังทุก platform ผ่านแล้ว ไม่มีการส่งไฟล์จริงระหว่าง CI
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
