@@ -109,13 +109,13 @@ python3 -m PyInstaller --clean --windowed --onedir --name SendToDevice app.py
 
 GitHub Actions ทดสอบและ build แบบ native บน Linux, Windows, macOS ARM/Intel ทุก push บน main เมื่อ push tag `v*` จะสร้าง release ZIP หลังทุก platform ผ่านแล้ว ไม่มีการส่งไฟล์จริงระหว่าง CI
 
-## ☕ สนับสนุนผู้พัฒนา / Support & Donation
+## สนับสนุนผู้พัฒนา / Support & Donation
 
 โปรเจกต์นี้เปิดให้ใช้งาน **ฟรี 100% (Open Source)** ภายใต้สัญญาอนุญาต MIT  
 หากแอปนี้ช่วยให้คุณส่งไฟล์ระหว่างเครื่องได้สะดวกและรวดเร็วขึ้น สามารถร่วมสนับสนุนผู้พัฒนาได้ครับ:
 
 <details>
-<summary><b>🇹🇭 สแกนผ่าน PromptPay QR (คลิกเพื่อดู QR Code)</b></summary>
+<summary><b>สแกนผ่าน PromptPay QR (คลิกเพื่อดู QR Code)</b></summary>
 <br>
 <p><i>สแกนผ่านแอปธนาคารไทยได้ทุกธนาคาร (เงินเข้าบัญชีผู้พัฒนาโดยตรง 0% ค่าธรรมเนียม):</i></p>
 <p align="left">
@@ -126,7 +126,7 @@ GitHub Actions ทดสอบและ build แบบ native บน Linux, Win
 <br>
 
 <details>
-<summary><b>🌐 ช่องทางสำหรับชาวต่างชาติ (Ko-fi / Buy Me a Coffee)</b></summary>
+<summary><b>ช่องทางสนับสนุนสากล (Ko-fi / Buy Me a Coffee)</b></summary>
 <br>
 <p align="left">
   <a href="https://ko-fi.com/n0ngXarm">
@@ -134,13 +134,13 @@ GitHub Actions ทดสอบและ build แบบ native บน Linux, Win
   </a>
   &nbsp;&nbsp;
   <a href="https://buymeacoffee.com/n0ngXarm">
-    <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=n0ngXarm&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" height="34" alt="Buy Me A Coffee" />
+    <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&slug=n0ngXarm&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" height="34" alt="Buy Me A Coffee" />
   </a>
 </p>
 <ul>
   <li><b>Ko-fi:</b> <a href="https://ko-fi.com/n0ngXarm">ko-fi.com/n0ngXarm</a></li>
   <li><b>Buy Me a Coffee:</b> <a href="https://buymeacoffee.com/n0ngXarm">buymeacoffee.com/n0ngXarm</a></li>
-  <li><b>GitHub Sponsor:</b> กดปุ่ม <b>Sponsor</b> 💖 ที่ด้านบนของ Repository ได้เลยครับ</li>
+  <li><b>GitHub Sponsor:</b> กดปุ่ม <b>Sponsor</b> ที่ด้านบนของ Repository ได้เลยครับ</li>
 </ul>
 </details>
 

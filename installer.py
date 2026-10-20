@@ -118,13 +118,14 @@ def install(destination=None, shortcuts=True):
     elif shortcuts:
         launcher = Path.home() / '.local/bin/send-to-device'
         shell_launcher(launcher, command); installed.append(str(launcher))
-        legacy = Path.home() / '.local/share/nautilus/scripts/Send-to-Android'
-        if legacy.exists() or legacy.is_symlink():
-            try:
-                legacy.unlink()
-            except OSError:
-                pass
-        script = Path.home() / '.local/share/nautilus/scripts/Send-to-Device'
+        for legacy_name in ('Send-to-Android', 'Send-to-Device'):
+            legacy = Path.home() / f'.local/share/nautilus/scripts/{legacy_name}'
+            if legacy.exists() or legacy.is_symlink():
+                try:
+                    legacy.unlink()
+                except OSError:
+                    pass
+        script = Path.home() / '.local/share/nautilus/scripts/Send-to-device'
         shell_launcher(script, command); installed.append(str(script))
         desktop = Path.home() / '.local/share/applications/send-to-device.desktop'
         desktop.parent.mkdir(parents=True, exist_ok=True)
