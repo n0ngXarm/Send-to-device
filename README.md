@@ -112,8 +112,18 @@ GitHub Actions ทดสอบและ build แบบ native บน Linux, Win
 ## ☕ สนับสนุนผู้พัฒนา / Support & Donation
 
 โปรเจกต์นี้เปิดให้ใช้งาน **ฟรี 100% (Open Source)** ภายใต้สัญญาอนุญาต MIT  
-หากแอปนี้ช่วยให้คุณส่งไฟล์ระหว่างเครื่องได้สะดวกและรวดเร็วขึ้น สามารถร่วมเลี้ยงกาแฟเป็นกำลังใจให้ผู้พัฒนาได้ครับ:
+หากแอปนี้ช่วยให้คุณส่งไฟล์ระหว่างเครื่องได้สะดวกและรวดเร็วขึ้น สามารถร่วมสนับสนุนผู้พัฒนาได้ผ่านช่องทางด้านล่างนี้ครับ:
 
+### 🇹🇭 พร้อมเพย์ (PromptPay QR) - สำหรับคนไทย
+สแกนผ่านแอปธนาคารไทยได้ทุกธนาคาร เงินเข้าบัญชีผู้พัฒนาโดยตรง (0% ค่าธรรมเนียม):
+
+<p align="left">
+  <img src="assets/promptpay.jpeg" alt="PromptPay QR Code" width="240">
+</p>
+
+---
+
+### 🌐 สำหรับต่างชาติ (International Supporters)
 <p align="left">
   <a href="https://ko-fi.com/n0ngXarm">
     <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi" height="36">
@@ -124,7 +134,7 @@ GitHub Actions ทดสอบและ build แบบ native บน Linux, Win
   </a>
 </p>
 
-* **Ko-fi:** [ko-fi.com/n0ngXarm](https://ko-fi.com/n0ngXarm) *(0% fee - แนะนำ)*
+* **Ko-fi:** [ko-fi.com/n0ngXarm](https://ko-fi.com/n0ngXarm)
 * **Buy Me a Coffee:** [buymeacoffee.com/n0ngXarm](https://buymeacoffee.com/n0ngXarm)
 * **GitHub Sponsor:** กดปุ่ม **Sponsor** 💖 ที่ด้านบนของ Repository ได้เลยครับ
 
