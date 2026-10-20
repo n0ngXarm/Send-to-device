@@ -4,6 +4,8 @@
   <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT">
   <img src="https://img.shields.io/badge/Platform-Linux%20%7C%20Windows%20%7C%20macOS-orange.svg" alt="Platform">
   <img src="https://img.shields.io/badge/Tailscale-Taildrop-informational.svg" alt="Tailscale Taildrop">
+  <a href="https://ko-fi.com/n0ngXarm"><img src="https://img.shields.io/badge/Ko--fi-F16061?style=flat&logo=ko-fi&logoColor=white" alt="Ko-fi"></a>
+  <a href="https://buymeacoffee.com/n0ngXarm"><img src="https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=flat&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me A Coffee"></a>
 </p>
 
 แอปส่งไฟล์ระหว่าง **เครื่องของคุณเอง** ผ่าน Tailscale Taildrop รองรับ Linux, Windows และ macOS
@@ -106,6 +108,25 @@ python3 -m PyInstaller --clean --windowed --onedir --name SendToDevice app.py
 ```
 
 GitHub Actions ทดสอบและ build แบบ native บน Linux, Windows, macOS ARM/Intel ทุก push บน main เมื่อ push tag `v*` จะสร้าง release ZIP หลังทุก platform ผ่านแล้ว ไม่มีการส่งไฟล์จริงระหว่าง CI
+
+## ☕ สนับสนุนผู้พัฒนา / Support & Donation
+
+โปรเจกต์นี้เปิดให้ใช้งาน **ฟรี 100% (Open Source)** ภายใต้สัญญาอนุญาต MIT  
+หากแอปนี้ช่วยให้คุณส่งไฟล์ระหว่างเครื่องได้สะดวกและรวดเร็วขึ้น สามารถร่วมเลี้ยงกาแฟเป็นกำลังใจให้ผู้พัฒนาได้ครับ:
+
+<p align="left">
+  <a href="https://ko-fi.com/n0ngXarm">
+    <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi" height="36">
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://buymeacoffee.com/n0ngXarm">
+    <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=n0ngXarm&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" height="36" alt="Buy Me A Coffee" />
+  </a>
+</p>
+
+* **Ko-fi:** [ko-fi.com/n0ngXarm](https://ko-fi.com/n0ngXarm) *(0% fee - แนะนำ)*
+* **Buy Me a Coffee:** [buymeacoffee.com/n0ngXarm](https://buymeacoffee.com/n0ngXarm)
+* **GitHub Sponsor:** กดปุ่ม **Sponsor** 💖 ที่ด้านบนของ Repository ได้เลยครับ
 
 ## License
 
