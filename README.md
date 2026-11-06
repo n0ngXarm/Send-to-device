@@ -147,3 +147,7 @@ GitHub Actions ทดสอบและ build แบบ native บน Linux, Win
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+## Windows native installer validation
+
+Native per-user Setup.exe is being verified in the Windows installer workflow. It bundles the runtime; installing Python is not required. Builds are unsigned. Windows SmartScreen warnings are possible. No firewall rules, antivirus exclusions, services or startup tasks are added. Send-to-device still requires Tailscale separately; GETEdit Office conversion requires LibreOffice separately. See PROJECT_PROGRESS.md for actual validation status.

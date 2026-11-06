@@ -103,6 +103,10 @@ class App:
         self.closing = False
 
         self.root.title(TITLE)
+        try:
+            self.root.iconbitmap(str(Path(__file__).resolve().parents[1]/'assets/app.ico'))
+        except tk.TclError:
+            pass
         self.root.geometry('940x700')
         self.root.minsize(780, 600)
         self.root.protocol('WM_DELETE_WINDOW', self.close)

@@ -24,7 +24,7 @@ if platform.startswith('macos'):
 else:
     shutil.copytree(root / 'dist/SendToDevice', stage / 'SendToDevice', dirs_exist_ok=True)
     launcher = 'install-windows.cmd' if platform.startswith('windows') else 'install-linux.sh'
-for name in (launcher, 'README.md'):
+for name in (launcher, 'README.md', 'LICENSE'):
     shutil.copy2(root / name, stage / name)
 archive = str(root / 'dist' / stage.name)
 if platform.startswith('macos'):
