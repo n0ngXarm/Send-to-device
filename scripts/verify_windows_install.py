@@ -11,7 +11,13 @@ root=Path(__file__).resolve().parents[1]
 setup=next((root/'dist/installer').glob('*setup.exe'))
 
 def run(args, timeout=180):
-    subprocess.run(list(map(str,args)),check=True,timeout=timeout)
+    diagnostics=root/'build/windows-runtime-error.txt'
+    diagnostics.parent.mkdir(parents=True,exist_ok=True)
+    env=dict(os.environ,WINDOWS_APP_DIAGNOSTICS=str(diagnostics))
+    try:subprocess.run(list(map(str,args)),check=True,timeout=timeout,env=env)
+    except Exception:
+        if diagnostics.exists():print(diagnostics.read_text(encoding='utf-8'),flush=True)
+        raise
 
 with tempfile.TemporaryDirectory(prefix='windows-install-') as d:
     folder=Path(d);target=folder/'โปรแกรม with spaces';fixture=folder/'test data';fixture.mkdir()
