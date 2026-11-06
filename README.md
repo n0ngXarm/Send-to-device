@@ -1,5 +1,7 @@
 # Send to Device
 
+<p align="center"><img src="assets/logo.png" width="160" alt="Send-to-device logo"></p>
+
 <p align="center">
   <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT">
   <img src="https://img.shields.io/badge/Platform-Linux%20%7C%20Windows%20%7C%20macOS-orange.svg" alt="Platform">
@@ -19,14 +21,14 @@
 
 ## ดาวน์โหลดพร้อมติดตั้ง
 
-ไปที่ [Releases](https://github.com/n0ngXarm/Send-to-device/releases/latest) เลือก ZIP ให้ตรงระบบ แล้ว **แตก ZIP ก่อน**:
+Windows ใช้ Setup.exe รุ่น 1.0.1 ส่วน Linux/macOS ใช้ ZIP รุ่น 1.0.0 ที่เผยแพร่ไว้ก่อนหน้า โดยแตก ZIP ก่อนติดตั้ง:
 
 | ระบบ | ไฟล์ | วิธีติดตั้ง |
 |---|---|---|
-| Linux x64 | `Send-to-device-linux-x64.zip` | `sh install-linux.sh` |
-| Windows x64 | `Send-to-device-windows-x64.zip` | ดับเบิลคลิก `install-windows.cmd` |
-| macOS Apple Silicon | `Send-to-device-macos-arm64.zip` | เปิด `install-macos.command` |
-| macOS Intel | `Send-to-device-macos-x64.zip` | เปิด `install-macos.command` |
+| Linux x64 | [Send-to-device-linux-x64.zip](https://github.com/n0ngXarm/Send-to-device/releases/download/v1.0.0/Send-to-device-linux-x64.zip) | `sh install-linux.sh` |
+| Windows x64 | [Setup.exe 1.0.1](https://github.com/n0ngXarm/Send-to-device/releases/download/v1.0.1/SendToDevice-1.0.1-windows-x64-setup.exe) | เปิด Setup.exe |
+| macOS Apple Silicon | [Send-to-device-macos-arm64.zip](https://github.com/n0ngXarm/Send-to-device/releases/download/v1.0.0/Send-to-device-macos-arm64.zip) | เปิด `install-macos.command` |
+| macOS Intel | [Send-to-device-macos-x64.zip](https://github.com/n0ngXarm/Send-to-device/releases/download/v1.0.0/Send-to-device-macos-x64.zip) | เปิด `install-macos.command` |
 
 ไฟล์ release รวม Python/Tk ไว้แล้ว **ไม่ต้องติดตั้ง Python เพิ่ม** แต่ต้องติดตั้ง [Tailscale](https://tailscale.com/download) และเข้าสู่ระบบบนทั้งสองเครื่อง เปิด Taildrop / Send Files ตามนโยบาย tailnet ของคุณก่อน
 
@@ -147,3 +149,19 @@ GitHub Actions ทดสอบและ build แบบ native บน Linux, Win
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+## Windows 10/11 x64
+
+[ดาวน์โหลด Send-to-device 1.0.1 Setup.exe](https://github.com/n0ngXarm/Send-to-device/releases/download/v1.0.1/SendToDevice-1.0.1-windows-x64-setup.exe) · [ผลและไฟล์ตรวจสอบ](https://github.com/n0ngXarm/Send-to-device/releases/tag/v1.0.1)
+
+เปิด Setup.exe แล้วทำตามขั้นตอน ติดตั้งเฉพาะบัญชีผู้ใช้ มีทางลัด Start Menu และถอนติดตั้งผ่าน Settings → Apps ได้ ไม่ต้องลง Python หรือ Node.js เอง
+
+ตัวติดตั้งผ่าน Windows CI: ติดตั้ง เปิดโปรแกรมจากพาธภาษาไทยและช่องว่าง ติดตั้งซ้ำ ตรวจทางลัดและรายการถอนติดตั้ง แล้วถอนติดตั้งโดยคงไฟล์ตัวอย่างของผู้ใช้ไว้ อ่านรายละเอียดและข้อจำกัดใน [docs/WINDOWS_INSTALLER.md](docs/WINDOWS_INSTALLER.md) การทดสอบนี้ไม่ใช่การยืนยันบนเครื่อง Windows 10/11 ของผู้ใช้จริง
+
+ไฟล์ยัง **ไม่มีลายเซ็นดิจิทัล** จึงอาจมี SmartScreen เตือน มี checksum และรายงานการสแกนในหน้า release โปรแกรมไม่เพิ่ม firewall exceptions, antivirus exclusions, services หรือ startup tasks
+
+ต้องติดตั้งและลงชื่อเข้าใช้ Tailscale แยกต่างหาก มีทางลัด Send To สำหรับส่งไฟล์เข้าโปรแกรม การทดสอบ CI ปิด discovery และไม่ได้ส่งไฟล์ไปอุปกรณ์จริง
+
+## Agent instructions
+
+Read [AGENTS.md](AGENTS.md), PROJECT_PROGRESS.md and the project skill under `.agents/skills/` before maintenance. These are repository-local instructions; no global installation is needed.
