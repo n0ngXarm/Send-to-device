@@ -28,5 +28,6 @@ Source: "..\dist\SendToDevice\*"; DestDir: "{app}"; Flags: ignoreversion recurse
 [Icons]
 Name: "{group}\Send-to-device"; Filename: "{app}\SendToDevice.exe"; WorkingDir: "{app}"
 Name: "{autodesktop}\Send-to-device"; Filename: "{app}\SendToDevice.exe"; Tasks: desktopicon
+Name: "{usersendto}\Send to Device"; Filename: "{app}\SendToDevice.exe"; WorkingDir: "{app}"
 [Run]
 Filename: "{app}\SendToDevice.exe"; Description: "Open Send-to-device"; Flags: nowait postinstall skipifsilent

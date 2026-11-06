@@ -9,3 +9,5 @@ Local regression: `python3 -m unittest discover -s tests -v` passed (exit 0): 10
 Installed binary test reproduced a startup timeout on Windows CI, before app-level diagnostics. Added CI-only runtime-hook traceback collection; no release published from the failed runs.
 
 Root cause reproduced in CI: PyInstaller 6.20 Tcl runtime hook requires _tcl_data, but current Windows Python 3.14.10 embeds Tcl/Tk 9 scripts in DLL zipfs. Added repo-local runtime hook through documented hook-directory mapping; validates embedded Tcl interpreter instead of requiring nonexistent external data. No build tool/runtime downgrade or security bypass. Full installed GUI test remains required.
+
+CI 42184982908 passed installed runtime, update, shortcuts, HKCU uninstall and data retention after Tcl9 packaging fix. Restored Send To shortcut parity with the existing installer and added install/uninstall checks for it; rerun required.

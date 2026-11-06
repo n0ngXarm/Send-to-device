@@ -28,6 +28,8 @@ with tempfile.TemporaryDirectory(prefix='windows-install-') as d:
         run([setup,'/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/SP-','/DIR='+str(target),'/LOG='+str(folder/(phase+'.log'))])
         exe=target/(NAME+'.exe');assert exe.is_file()
         assert shortcut.is_file(),shortcut
+        sendto=Path(os.environ['APPDATA'])/'Microsoft/Windows/SendTo/Send to Device.lnk'
+        assert sendto.is_file(),sendto
         with winreg.OpenKey(winreg.HKEY_CURRENT_USER,key) as registry:
             location=winreg.QueryValueEx(registry,'InstallLocation')[0]
             assert Path(location)==target
@@ -40,6 +42,7 @@ with tempfile.TemporaryDirectory(prefix='windows-install-') as d:
     run([target/'unins000.exe','/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART'])
     assert not (target/(NAME+'.exe')).exists()
     assert not shortcut.exists()
+    assert not sendto.exists()
     try:winreg.OpenKey(winreg.HKEY_CURRENT_USER,key)
     except FileNotFoundError:pass
     else:raise AssertionError('Uninstall registry entry remains')
