@@ -12,7 +12,7 @@ ENTRY='app.py'
 VERSION='1.0.1'
 
 def build(name,entry,windowed):
-    command=[sys.executable,'-m','PyInstaller','--noconfirm','--clean','--onedir','--noupx','--name',name,'--icon','assets/app.ico','--version-file','packaging/version_info.txt','--add-data','assets;assets']
+    command=[sys.executable,'-m','PyInstaller','--noconfirm','--clean','--onedir','--noupx','--name',name,'--icon','assets/app.ico','--runtime-hook','packaging/diagnostics_hook.py','--version-file','packaging/version_info.txt','--add-data','assets;assets']
     command+=['--windowed' if windowed else '--console']
     if NAME=='GETEdit':
         command+=['--copy-metadata','PyMuPDF','--copy-metadata','PySide6','--copy-metadata','shiboken6']

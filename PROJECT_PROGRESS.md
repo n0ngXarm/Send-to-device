@@ -5,3 +5,5 @@
 2026-11-06: User prioritized Windows installation stability; npm deferred. Prepared per-user Inno installer and CI verification of installed runtime, reinstall/update, shortcuts, uninstall registry and user fixture retention. No host dependencies or security settings changed. CI results pending; unsigned, no real Windows desktop acceptance yet.
 
 Local regression: `python3 -m unittest discover -s tests -v` passed (exit 0): 10 tests. GETEdit worker command test first failed; Allzip overwrite-failure and empty-folder tests first failed before fixes. Windows built-binary validation pending.
+
+Installed binary test reproduced a startup timeout on Windows CI, before app-level diagnostics. Added CI-only runtime-hook traceback collection; no release published from the failed runs.
