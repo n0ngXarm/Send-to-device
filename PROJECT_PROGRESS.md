@@ -7,3 +7,5 @@
 Local regression: `python3 -m unittest discover -s tests -v` passed (exit 0): 10 tests. GETEdit worker command test first failed; Allzip overwrite-failure and empty-folder tests first failed before fixes. Windows built-binary validation pending.
 
 Installed binary test reproduced a startup timeout on Windows CI, before app-level diagnostics. Added CI-only runtime-hook traceback collection; no release published from the failed runs.
+
+Root cause reproduced in CI: PyInstaller 6.20 Tcl runtime hook requires _tcl_data, but current Windows Python 3.14.10 embeds Tcl/Tk 9 scripts in DLL zipfs. Added repo-local runtime hook through documented hook-directory mapping; validates embedded Tcl interpreter instead of requiring nonexistent external data. No build tool/runtime downgrade or security bypass. Full installed GUI test remains required.

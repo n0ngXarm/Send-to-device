@@ -12,7 +12,7 @@ ENTRY='app.py'
 VERSION='1.0.1'
 
 def build(name,entry,windowed):
-    command=[sys.executable,'-m','PyInstaller','--noconfirm','--clean','--onedir','--noupx','--name',name,'--icon','assets/app.ico','--runtime-hook','packaging/diagnostics_hook.py','--version-file','packaging/version_info.txt','--add-data','assets;assets']
+    command=[sys.executable,'-m','PyInstaller','--noconfirm','--clean','--onedir','--noupx','--name',name,'--icon','assets/app.ico','--additional-hooks-dir','packaging/hooks','--runtime-hook','packaging/diagnostics_hook.py','--version-file','packaging/version_info.txt','--add-data','assets;assets']
     command+=['--windowed' if windowed else '--console']
     if NAME=='GETEdit':
         command+=['--copy-metadata','PyMuPDF','--copy-metadata','PySide6','--copy-metadata','shiboken6']
@@ -35,7 +35,7 @@ shutil.copy2(source,stage/'corresponding-source.zip')
 notices=['Unsigned build. Windows SmartScreen reputation is not guaranteed.', 'No firewall rules, antivirus exclusions or background services are installed.', 'Python: '+sys.version, 'Application source: corresponding-source.zip']
 if NAME=='GETEdit':
     notices+=['PyMuPDF: AGPL-3.0; https://pypi.org/project/PyMuPDF/','PySide6/Qt and shiboken6: LGPL-3.0/GPL; https://code.qt.io/cgit/pyside/pyside-setup.git/','Qt source: https://download.qt.io/archive/qt/','The shared Qt libraries in _internal may be replaced with compatible modified versions.']
-    for package in ('PyMuPDF','PySide6','shiboken6'):
+    for package in ('PyMuPDF','PySide6','PySide6_Essentials','PySide6_Addons','shiboken6'):
         dist=importlib.metadata.distribution(package)
         notices.append(package+' '+dist.version)
         for f in dist.files or []:
@@ -44,6 +44,15 @@ if NAME=='GETEdit':
                 if src.is_file():
                     dest=stage/'licenses'/package/str(f).replace('..','_')
                     dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(src,dest)
+python_license=Path(sys.base_prefix)/'LICENSE.txt'
+if python_license.exists():
+    (stage/'licenses').mkdir(exist_ok=True)
+    shutil.copy2(python_license,stage/'licenses/Python-LICENSE.txt')
+if NAME=='GETEdit':
+    import PySide6.QtCore
+    notices+=['Qt '+PySide6.QtCore.qVersion(),
+              'Versioned PySide source: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-'+importlib.metadata.version('PySide6')+'-src/',
+              'Versioned PyMuPDF source: https://pypi.org/project/PyMuPDF/'+importlib.metadata.version('PyMuPDF')+'/#files']
 (stage/'BUILD-NOTICES.txt').write_text('\n'.join(notices),encoding='utf-8')
 compiler=Path(r'C:\Program Files (x86)\Inno Setup 6\ISCC.exe')
 if not compiler.exists():raise SystemExit('Inno Setup 6 unavailable on CI runner')
